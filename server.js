@@ -3,9 +3,8 @@ const app = express();
 
 app.use(express.static(__dirname + "/pub"));
 
-app.get("/index"); //just a rough for now without any error handling.
+app.get('/index'); 
 
-//testing
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {
