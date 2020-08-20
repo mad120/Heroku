@@ -68,7 +68,7 @@
         },
         WHITE : {
             MAIN : '#ffffff',
-            SECONDARY : '#8c8c8c',
+            SECONDARY : '#a1a1a1',
         },
         BLACK : {
             MAIN : '#1a1a1a',
@@ -78,6 +78,23 @@
     /*
     ***********************************************************************
         tables
+        
+        
+        [
+            {
+                key : value1
+            }
+            {
+                key : value2
+            }
+        ]
+        
+        table .table
+            thead
+                tr th key
+            tbody
+                tr td value1
+                tr td value2
     */
     
     /*
@@ -92,18 +109,19 @@
                                         font-weight:400;\
                                         padding:10px;\
                                         width: 100%;\
-                                        border-spacing: calc(5px + 1vw);\
+                                        /*border-spacing: calc(5px + 1vw);*/\
                                         font-size:calc(7px + 1vw);\
                                     }\
                                     .table td, .table th {\
                                         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 11px 0 rgba(0, 0, 0, 0.19);\
-                                        border-radius:15px;\
+                                        /*border-radius:15px;*/\
                                         padding: 5px;\
                                         /*filter: blur(8px);*/\
                                         transition: 0.5s;\
                                     }\
                                     .table td:hover {\
                                         box-shadow: 0 11px 22px 0 rgba(0, 0, 0, 0.2), 0 11px 22px 0 rgba(0, 0, 0, 0.19);\
+                                        cursor : pointer;\
                                     }\
                                     /*first column with number*/\
                                     .table td:nth-child(1) { \
@@ -120,12 +138,67 @@
                                     }\
                                    .selected-row{\
                                         background-color: yellow;\
-                                        text-align: right;\
+                                        /*text-align: right;*/\
                                     }');
                 document.getElementsByTagName('head')[0].appendChild(style);
                 this.disabled = false;
             }
             return 'table';
+        },
+        LEFT_ALIGN : {
+            disabled : true,
+            style : function(){
+                if (this.disabled){
+                    let style = createStyle('.table-left-align.table td{\
+                                                text-align: left;\
+                                            }');
+                    document.getElementsByTagName('head')[0].appendChild(style);
+                    this.disabled = false;
+                }
+                return 'table-left-align';
+            }
+        },
+        RIGHT_ALIGN : {
+            disabled : true,
+            style : function(){
+                if (this.disabled){
+                    let style = createStyle('.table-right-align.table td{\
+                                                text-align: right;\
+                                            }');
+                    document.getElementsByTagName('head')[0].appendChild(style);
+                    this.disabled = false;
+                }
+                return 'table-right-align';
+            }
+        },
+        CENTER_ALIGN : {
+            disabled : true,
+            style : function(){
+                if (this.disabled){
+                    let style = createStyle('.table-center-align.table td{\
+                                                text-align: center;\
+                                            }');
+                    document.getElementsByTagName('head')[0].appendChild(style);
+                    this.disabled = false;
+                }
+                return 'table-center-align';
+            }
+        },
+        ROUNDED : {     
+            disabled : true,
+            style : function(){
+                if (this.disabled){
+                    let style = createStyle('.table-rounded.table td, .table-rounded.table th{\
+                                                border-radius:15px;\
+                                            }\
+                                            .table-rounded.table{\
+                                                border-spacing: calc(5px + 1vw);\
+                                            }');
+                    document.getElementsByTagName('head')[0].appendChild(style);
+                    this.disabled = false;
+                }
+                return 'table-rounded';   
+            }
         }
     };
     
@@ -135,7 +208,6 @@
             if (this.disabled){
                 let style = createStyle('.selected-row{\
                                         background-color: #ffcc00;\
-                                        text-align: right;\
                                     }');
                 document.getElementsByTagName('head')[0].appendChild(style);
                 this.disabled = false;
@@ -150,6 +222,7 @@
             if (this.disabled){
                 let style = createStyle('.sortable:hover{\
                                           background-color: #ffcc00;\
+                                          cursor: pointer;\
                                         }');
                 document.getElementsByTagName('head')[0].appendChild(style);
                 this.disabled = false;
@@ -357,6 +430,101 @@
      }
     /*
     ***********************************************************************
+        table styles
+    */
+    function _rightAlignTable(){
+        this.table.classList.add(TABLE_STYLE.RIGHT_ALIGN.style());
+        return  {
+            root : this.root,
+            table : this.table,
+            filter : this.filter,
+            data : this.data,
+            gray : _setTableGrayTheme,
+            red : _setTableRedTheme,
+            blue : _setTableBlueTheme,
+            green : _setTableGreenTheme,
+            black : _setTableBlackTheme,
+            white : _setTableWhiteTheme,
+            
+            sortable : _addSortableEventToHeads,
+            filtered : _addFilterEventToRoot,
+            total : _generateTotal,
+            avg : _generateAverage,
+            
+            rounded : _roundedTable
+        }
+     }
+    function _leftAlignTable(){
+        this.table.classList.add(TABLE_STYLE.LEFT_ALIGN.style());
+        return  {
+            root : this.root,
+            table : this.table,
+            filter : this.filter,
+            data : this.data,
+            gray : _setTableGrayTheme,
+            red : _setTableRedTheme,
+            blue : _setTableBlueTheme,
+            green : _setTableGreenTheme,
+            black : _setTableBlackTheme,
+            white : _setTableWhiteTheme,
+            
+            sortable : _addSortableEventToHeads,
+            filtered : _addFilterEventToRoot,
+            total : _generateTotal,
+            avg : _generateAverage,
+            
+            rounded : _roundedTable
+        }
+     }
+    function _centerAlignTable(){
+        this.table.classList.add(TABLE_STYLE.CENTER_ALIGN.style());
+        return  {
+            root : this.root,
+            table : this.table,
+            filter : this.filter,
+            data : this.data,
+            gray : _setTableGrayTheme,
+            red : _setTableRedTheme,
+            blue : _setTableBlueTheme,
+            green : _setTableGreenTheme,
+            black : _setTableBlackTheme,
+            white : _setTableWhiteTheme,
+            
+            sortable : _addSortableEventToHeads,
+            filtered : _addFilterEventToRoot,
+            total : _generateTotal,
+            avg : _generateAverage,
+            
+            rounded : _roundedTable
+        }
+     }
+    function _roundedTable(){
+        this.table.classList.add(TABLE_STYLE.ROUNDED.style());
+        return  {
+            root : this.root,
+            table : this.table,
+            filter : this.filter,
+            data : this.data,
+            gray : _setTableGrayTheme,
+            red : _setTableRedTheme,
+            blue : _setTableBlueTheme,
+            green : _setTableGreenTheme,
+            black : _setTableBlackTheme,
+            white : _setTableWhiteTheme,
+            
+            sortable : _addSortableEventToHeads,
+            filtered : _addFilterEventToRoot,
+            total : _generateTotal,
+            avg : _generateAverage,
+            
+            left : _leftAlignTable,
+            right : _rightAlignTable,
+            center : _centerAlignTable
+        }
+     }
+    
+    /*
+    ***********************************************************************
         table generator
     */
     function generateTHead(table, data) {
@@ -406,38 +574,39 @@
         table sorting
     */
     function _addSortableEventToHeads(){
-        if (isTypeOf(this.table, TYPE.UNDEF)){
-            printWarn("invalid sortable target : ubdef table");
-            return ;
-        }
-        let thead = this.table.getElementsByTagName('thead');
-        if (isTypeOf(thead, TYPE.UNDEF)){
-            printWarn("invalid sortable target : no thead");
-            return ;
-        }
-        if (thead.length === 0){
-            printWarn("invalid sortable target : empty thead");
-            return ;
-        }
-        if (this.table === null){
-            printWarn("invalid sortable target : table wasnt created");
-            return ;
-        }
-        let heads = thead[0].getElementsByTagName('th');
-        for (let th of heads) {
-            
-            th.classList.add(SORTABLE_STYLE.style());
-            
-            th.addEventListener("click", ()=>{
-                _sort(this.data, th.innerHTML);
-                let tbody = this.table.getElementsByTagName('tbody');
-                if (tbody.length > 0){
-                    this.table.removeChild(tbody[0]);
-                    generateTBody(this.table, this.data);
-                } else {
-                    printWarn("invalid sortable target : empty tbody");
-                }
-            });
+        if (isTypeOf(this.table, TYPE.UNDEF) || this.table === null){
+            printWarn("invalid sortable target : undefined/null table");
+        } else {
+     
+            let thead = this.table.getElementsByTagName('thead');
+            if (isTypeOf(thead, TYPE.UNDEF)){
+                printWarn("invalid sortable target : no thead");
+                return ;
+            }
+            if (thead.length === 0){
+                printWarn("invalid sortable target : empty thead");
+                return ;
+            }
+            if (this.table === null){
+                printWarn("invalid sortable target : table wasnt created");
+                return ;
+            }
+            let heads = thead[0].getElementsByTagName('th');
+            for (let th of heads) {
+
+                th.classList.add(SORTABLE_STYLE.style());
+
+                th.addEventListener("click", ()=>{
+                    _sort(this.data, th.innerHTML);
+                    let tbody = this.table.getElementsByTagName('tbody');
+                    if (tbody.length > 0){
+                        this.table.removeChild(tbody[0]);
+                        generateTBody(this.table, this.data);
+                    } else {
+                        printWarn("invalid sortable target : empty tbody");
+                    }
+                });
+            }
         }
         return {
             root : this.root,
@@ -525,34 +694,34 @@
     function _addFilterEventToRoot(){
         if (this.root === null){
             printWarn("invalid filter target : no root element");
-            return ;
+        } else if (this.table === null){
+            printWarn("invalid filter target : table wasn't created");
+        } else {
+           let input = document.createElement('input')
+            input.type = 'text';
+            input.className = TABLE_FILTER_STYLE.style();
+            input.placeholder = 'Search . . .';
+            this.root.insertBefore(input, this.root.childNodes[0]);
+            input.addEventListener("input", ()=>{
+                if (this.table === null){
+                    printWarn("invalid filter target : table wasn't created");
+                    return ;
+                }
+                let tbody = this.table.getElementsByTagName('tbody');
+                if (tbody.length > 0){
+                    if(input.value.length > 0){
+                        this.table.removeChild(tbody[0]);
+                        let fData  = _createFilteredData(this.data, input.value);
+                        generateTBody(this.table, fData);
+                     } else {
+                        this.table.removeChild(tbody[0]);
+                        generateTBody(this.table, this.data);    
+                     }
+                }
+            }); 
+            this.filter = input;
+            this.gray();
         }
-        let input = document.createElement('input')
-        input.type = 'text';
-        input.className = TABLE_FILTER_STYLE.style();
-        input.placeholder = 'Search . . .';
-        this.root.insertBefore(input, this.root.childNodes[0]);
-        input.addEventListener("input", ()=>{
-            if (this.table === null){
-                printWarn("invalid filter target : table wasnt created");
-                return ;
-            }
-            let tbody = this.table.getElementsByTagName('tbody');
-            if (tbody.length > 0){
-                if(input.value.length > 0){
-                    this.table.removeChild(tbody[0]);
-                    let fData  = _createFilteredData(this.data, input.value);
-                    generateTBody(this.table, fData);
-                 } else {
-                    this.table.removeChild(tbody[0]);
-                    generateTBody(this.table, this.data);    
-                 }
-            }
-        });
-        
-        this.filter = input;
-        this.gray();
-        
         return {
             root : this.root,
             table : this.table,
@@ -620,23 +789,23 @@
     function _generateTotal(){
         let thead = null;
         if (this.table === null){
-            printWarn("invalid total target : table wasnt created");
+            printWarn("invalid total target : table wasn't created");
         } else {
            thead = this.table.getElementsByTagName('thead');
-        }
-        if (thead.length === null || isTypeOf(thead[0], TYPE.UNDEF)){
-            printWarn("invalid total target : table has no thead");
-        }else{
-            let theadRow = thead[0].insertRow();
-            
-            let total = initThObj(this.data);
-            appendEmptyTh(theadRow);
-            columnSum(total, this.data);
-            appendObjToTh(total, this.data, theadRow);
+            if (thead.length === null || isTypeOf(thead[0], TYPE.UNDEF)){
+                printWarn("invalid total target : table has no thead");
+            }else{
+                let theadRow = thead[0].insertRow();
 
-            let label = document.createElement("th");
-            label.innerHTML = 'Total';
-            theadRow.appendChild(label);
+                let total = initThObj(this.data);
+                appendEmptyTh(theadRow);
+                columnSum(total, this.data);
+                appendObjToTh(total, this.data, theadRow);
+
+                let label = document.createElement("th");
+                label.innerHTML = 'Total';
+                theadRow.appendChild(label);
+            }
         }
         return {
             root : this.root,
@@ -663,31 +832,32 @@
     function _generateAverage(){
         let thead = null;
         if (this.table === null){
-            printWarn("invalid total target : table wasnt created");
+            printWarn("invalid average target : table wasn't created");
         } else {
            thead = this.table.getElementsByTagName('thead');
-        }
-        if (thead.length === 0 || isTypeOf(thead[0], TYPE.UNDEF)){
-            printWarn("invalid average target : table has no thead");
-        }else{
-            let theadRow = thead[0].insertRow();
-            
-            let avg = initThObj(this.data);
-            appendEmptyTh(theadRow);
-            columnSum(avg, this.data);
-            
-            for (let key of Object.keys(this.data[0])) {
-                if (isTypeOf(avg[key], TYPE.NUMBER)){
-                    avg[key] /= this.data.length;
-                } 
+            if (thead.length === 0 || isTypeOf(thead[0], TYPE.UNDEF)){
+                printWarn("invalid average target : table has no thead");
+            }else{
+                let theadRow = thead[0].insertRow();
+
+                let avg = initThObj(this.data);
+                appendEmptyTh(theadRow);
+                columnSum(avg, this.data);
+
+                for (let key of Object.keys(this.data[0])) {
+                    if (isTypeOf(avg[key], TYPE.NUMBER)){
+                        avg[key] /= this.data.length;
+                    } 
+                }
+
+                appendObjToTh(avg, this.data, theadRow);
+
+                let label = document.createElement("th");
+                label.innerHTML = 'Avg';
+                theadRow.appendChild(label);
             }
-            
-            appendObjToTh(avg, this.data, theadRow);
-            
-            let label = document.createElement("th");
-            label.innerHTML = 'Avg';
-            theadRow.appendChild(label);
         }
+        
         return {
             root : this.root,
             table : this.table,
@@ -727,7 +897,12 @@
             sortable : _addSortableEventToHeads,
             filtered : _addFilterEventToRoot,
             total : _generateTotal,
-            avg : _generateAverage
+            avg : _generateAverage,
+            
+            rounded : _roundedTable,
+            left : _leftAlignTable,
+            right : _rightAlignTable,
+            center : _centerAlignTable
         }
         let root = document.getElementById(this.id);
         
@@ -757,7 +932,7 @@
         let table = document.createElement('table');
         accessor.root.appendChild(table);
         
-        let filteredData = filterDataByHash(dataCopy);
+        let filteredData = filterDataByHash(dataCopy, Object.keys(dataCopy[0]));
         
         generateTHead(table, filteredData);
         generateTBody(table, filteredData);
@@ -782,9 +957,9 @@
         return hash;
     }
     
-    function filterDataByHash(data){
+    function filterDataByHash(data, keys){
         let filteredData = new Array();
-        const FIRST_HASH = getHash(Object.keys(data[0]));
+        const FIRST_HASH = getHash(keys);
         for (let e of data) {
             let hash = getHash(Object.keys(e));
             if (hash.localeCompare(FIRST_HASH) === 0){
@@ -796,6 +971,30 @@
     /*
     ***********************************************************************
         header 
+        
+        {
+            img:
+            label:
+            text:
+            menu:
+                [
+                    {
+                        label:
+                        text:
+                        id:
+                    }
+                ]
+        }
+        
+        div header-image-container
+            div header-text header-text-label
+            div header-text header-text-under
+            
+            div header-menu
+                div 
+                div
+                div
+            
     */ 
     function headerDataValidation(data){
         if (isTypeOf(data, TYPE.OBJECT)){
@@ -827,6 +1026,8 @@
         }
         return false;
     }
+
+    
      /*
     ***********************************************************************
         header  style
@@ -1006,6 +1207,7 @@
                                                transition: all 1s ease;\
                                                font-size: calc(10px + 1.5vw); \
                                                border-bottom: 2px solid black; \
+                                               cursor : pointer;\
                                             }');
                 document.getElementsByTagName('head')[0].appendChild(style);
                 this.disabled = false;
@@ -1118,12 +1320,12 @@
     function _rightHeader(){
         if (this.menu === null || this.label === null || this.text === null || this.menuText === null){
             printWarn('null in header position setter')
-            return ;
+        } else {
+            this.label.classList.add(HEADER_TEXT_STYLE.styleRight());
+            this.text.classList.add(HEADER_TEXT_STYLE.styleRight());
+            this.menu.classList.add(HEADER_MENU_STYLE.styleRight());
+            this.menuText.classList.add(HEADER_MENU_STYLE.styleRight());
         }
-        this.label.classList.add(HEADER_TEXT_STYLE.styleRight());
-        this.text.classList.add(HEADER_TEXT_STYLE.styleRight());
-        this.menu.classList.add(HEADER_MENU_STYLE.styleRight());
-        this.menuText.classList.add(HEADER_MENU_STYLE.styleRight());
         return {
             root : this.root,
             header : this.header,
@@ -1139,12 +1341,13 @@
     function _leftHeader(){
         if (this.menu === null || this.label === null || this.text === null || this.menuText === null){
             printWarn('null in header position setter')
-            return ;
+        } else {
+            this.label.classList.add(HEADER_TEXT_STYLE.styleLeft());
+            this.text.classList.add(HEADER_TEXT_STYLE.styleLeft());
+            this.menu.classList.add(HEADER_MENU_STYLE.styleLeft());
+            this.menuText.classList.add(HEADER_MENU_STYLE.styleLeft()); 
         }
-        this.label.classList.add(HEADER_TEXT_STYLE.styleLeft());
-        this.text.classList.add(HEADER_TEXT_STYLE.styleLeft());
-        this.menu.classList.add(HEADER_MENU_STYLE.styleLeft());
-        this.menuText.classList.add(HEADER_MENU_STYLE.styleLeft());
+
         return {
             root : this.root,
             header : this.header,
@@ -1198,7 +1401,7 @@
         let root = document.getElementById(this.id);
         
         if (isTypeOf(root, TYPE.UNDEF) || root == null){
-            printWarn("header can't be appended to undefined");
+            printWarn("header can't be appended to undefined/null");
             return accessor;
         }
         root.innerHTML = '';
@@ -1240,7 +1443,382 @@
             
             accessor.left();
  
+        } else {
+            printWarn("header : invalid input data");
         }
+        return accessor;
+    }
+    /*
+    ***********************************************************************
+        tab
+        
+        
+        [
+            {
+                label:
+                content:
+                id:
+            }
+        ]
+        div tab-containner
+            button
+        div tab-content
+            div
+    */ 
+    /*
+    ***********************************************************************
+        tab  style
+    */    
+    const TAB_CONTAINER_STYLE = {
+        VERT : {
+                disabled : true,
+                style : function(){
+                    if (this.disabled){
+                        let style = createStyle('.tab-container {\
+                                                        float: left;\
+                                                        width: 30%;\
+                                                        height: 300px;\
+                                                        overflow: auto;\
+                                                        box-sizing: border-box\
+                                                    }\
+                                                .tab-container button {\
+                                                        border-radius: 15px 0px 0px 15px;\
+                                                        display: block;\
+                                                        color: black;\
+                                                        padding: 22px 16px;\
+                                                        width: 100%;\
+                                                        border: none;\
+                                                        outline: none;\
+                                                        text-align: center;\
+                                                        cursor: pointer;\
+                                                        transition: 0.3s;\
+                                                        font-size: 17px;\
+                                                        background-color: #efefef;\
+                                                }');
+                        document.getElementsByTagName('head')[0].appendChild(style);
+                        this.disabled = false;
+                    }
+                    return 'tab-container';
+                }
+        },
+        HOR : {
+                disabled : true,
+                style : function(){
+                    if (this.disabled){
+                        let style = createStyle('.tab-container-hor {\
+                                                      overflow: auto;\
+                                                      white-space: nowrap;\
+                                                    }\
+                                                .tab-container-hor button {\
+                                                      display: inline-block;\
+                                                      border-radius: 15px 15px 0px 0px;\
+                                                      border: none;\
+                                                      outline: none;\
+                                                      cursor: pointer;\
+                                                      padding: 14px 16px;\
+                                                      transition: 0.3s;\
+                                                      font-size: 17px;\
+                                                }');
+                        document.getElementsByTagName('head')[0].appendChild(style);
+                        this.disabled = false;
+                    }
+                    return 'tab-container-hor';
+                }
+        }
+        
+    };
+
+    function tabColorPattern(className, hoverColor, mainColor, textColor){
+        return '.' + className + ' button:hover {\
+                    background-color: ' + hoverColor + ';\
+                }\
+                .' + className + ' button.active {\
+                    background-color: ' + mainColor + ';\
+                    color: ' + textColor + ';\
+                    font-weight: bold;\
+                }\
+                .' + className + '::-webkit-scrollbar {\
+                    width: 5px;\
+                    background-color: ' + mainColor + ';\
+                } \
+                .' + className + '::-webkit-scrollbar-track {\
+                    background-color: #ffffff;\
+                }\
+                .' + className + '::-webkit-scrollbar-thumb {\
+                    background-color: ' + mainColor + ';\
+                    border: 0.5px solid #ffffff;\
+                }\
+                .' + className + '.tab-content, .' + className + '.tab-content-hor{\
+                    border: 5px solid ' + mainColor + ';\
+                }';
+    }
+    const TAB_COLOR_THEME = {
+        GRAY : {
+            disabled : true,
+            style : function(){
+                let className = 'tab-gray';
+                if (this.disabled){
+                    let style = createStyle( tabColorPattern(className, COLOR_THEMES.GRAY.SECONDARY, COLOR_THEMES.GRAY.MAIN, 'white') );
+                    document.getElementsByTagName('head')[0].appendChild(style);
+                    this.disabled = false;
+                }
+                return className;
+            }
+        },
+        RED : {
+            disabled : true,
+            style : function(){
+                let className = 'tab-red';
+                if (this.disabled){
+                    let style = createStyle( tabColorPattern(className, COLOR_THEMES.RED.SECONDARY, COLOR_THEMES.RED.MAIN, 'white') );
+                    document.getElementsByTagName('head')[0].appendChild(style);
+                    this.disabled = false;
+                }
+                return className;
+            }
+        },
+        BLUE : {
+            disabled : true,
+            style : function(){
+                let className = 'tab-blue';
+                if (this.disabled){
+                    let style = createStyle( tabColorPattern(className, COLOR_THEMES.BLUE.SECONDARY, COLOR_THEMES.BLUE.MAIN, 'white') );
+                    document.getElementsByTagName('head')[0].appendChild(style);
+                    this.disabled = false;
+                }
+                return className;
+            }
+        },
+        GREEN : {
+            disabled : true,
+            style : function(){
+                let className = 'tab-green';
+                if (this.disabled){
+                    let style = createStyle( tabColorPattern(className, COLOR_THEMES.GREEN.SECONDARY, COLOR_THEMES.GREEN.MAIN, 'white') );
+                    document.getElementsByTagName('head')[0].appendChild(style);
+                    this.disabled = false;
+                }
+                return className;
+            }
+        },
+        BLACK : {
+            disabled : true,
+            style : function(){
+                let className = 'tab-black';
+                if (this.disabled){
+                    let style = createStyle( tabColorPattern(className, COLOR_THEMES.BLACK.SECONDARY, COLOR_THEMES.BLACK.MAIN, 'white') );
+                    document.getElementsByTagName('head')[0].appendChild(style);
+                    this.disabled = false;
+                }
+                return className;
+            }
+        }
+    };
+    function replaceTabStyle(elem, oldStyle, newStyle){
+        if (elem === null){
+            printWarn('using tab style on null');
+            return ;
+        }
+        elem.classList.remove(oldStyle);
+        
+        elem.classList.add(newStyle);
+    }
+    
+    function _setBlueTabTheme(){
+        replaceTabStyle(this.container, TAB_COLOR_THEME.GRAY.style(), TAB_COLOR_THEME.BLUE.style());
+        replaceTabStyle(this.content, TAB_COLOR_THEME.GRAY.style(), TAB_COLOR_THEME.BLUE.style());
+    }
+    
+    function _setRedTabTheme(){
+        replaceTabStyle(this.container, TAB_COLOR_THEME.GRAY.style(), TAB_COLOR_THEME.RED.style());
+        replaceTabStyle(this.content, TAB_COLOR_THEME.GRAY.style(), TAB_COLOR_THEME.RED.style());
+    }
+    
+    function _setGreenTabTheme(){
+        replaceTabStyle(this.container, TAB_COLOR_THEME.GRAY.style(), TAB_COLOR_THEME.GREEN.style());
+        replaceTabStyle(this.content, TAB_COLOR_THEME.GRAY.style(), TAB_COLOR_THEME.GREEN.style());
+    }
+    
+    function _setBlackTabTheme(){
+        replaceTabStyle(this.container, TAB_COLOR_THEME.GRAY.style(), TAB_COLOR_THEME.BLACK.style());
+        replaceTabStyle(this.content, TAB_COLOR_THEME.GRAY.style(), TAB_COLOR_THEME.BLACK.style());
+    }
+    
+    const TAB_CONTENT_STYLE = {
+        VERT : {
+                disabled : true,
+                style : function(){
+                    if (this.disabled){
+                        let style = createStyle('.tab-content {\
+                                                      float: left;\
+                                                      padding: 0px 12px;\
+                                                      width: 70%;\
+                                                      border-radius: 0px 15px 15px 0px;\
+                                                      height: 300px;\
+                                                      overflow: auto;\
+                                                      direction: rtl;\
+                                                      box-sizing: border-box\
+                                                    }\
+                                                .tab-content div{\
+                                                    direction: ltr;\
+                                                }');
+                        document.getElementsByTagName('head')[0].appendChild(style);
+                        this.disabled = false;
+                    }
+                    return 'tab-content';
+                }
+        },
+        HOR : {
+                disabled : true,
+                style : function(){
+                    if (this.disabled){
+                        let style = createStyle('.tab-content-hor {\
+                                                        border-radius: 0px 0px 15px 15px;\
+                                                        padding: 6px 12px;\
+                                                        border: 1px solid #ccc;\
+                                                        height: 300px;\
+                                                        overflow: auto;\
+                                                    }\
+                                                .tab-content-hor div{\
+                                                    direction: ltr;\
+                                                }');
+                        document.getElementsByTagName('head')[0].appendChild(style);
+                        this.disabled = false;
+                    }
+                    return 'tab-content-hor';
+                }
+        }
+    };
+
+    function _setHorTab(){
+        replaceTabStyle(this.container, TAB_CONTAINER_STYLE.VERT.style(), TAB_CONTAINER_STYLE.HOR.style());
+        replaceTabStyle(this.content, TAB_CONTENT_STYLE.VERT.style(), TAB_CONTENT_STYLE.HOR.style());
+        return {
+            root: this.root,
+            data: this.data,
+            container: this.container,
+            content: this.content,
+            text: this.text,
+            
+            blue : _setBlueTabTheme,
+            red : _setRedTabTheme,
+            green : _setGreenTabTheme,
+            black : _setBlackTabTheme,
+        };
+    }
+    
+    function tabFilter(data){
+        if (Array.isArray(data)){
+            const KEYS = ['label', 'content', 'id'];
+            let filteredData = filterDataByHash(data, KEYS);
+
+            if (filteredData.length === 0){
+                return null;
+            }
+            if (filteredData.length !== data.length){
+                printWarn('some input data was invalid for tab generator');
+            }
+            return filteredData;
+        }
+        return null;
+    }
+
+    function createContainer(root, data){
+        let container = document.createElement('div');
+        container.classList.add(TAB_CONTAINER_STYLE.VERT.style());
+        root.appendChild(container);
+        let first = true;
+        for (let d of data){
+            let butt = document.createElement('button');
+            butt.innerHTML = d.label;
+            if (first){
+                butt.classList.add('active');
+                first = false;
+            }
+            butt.id = d.id;
+            container.appendChild(butt);
+        }
+        return container;
+    }
+    
+    function createContent(root, data){
+        let content = document.createElement('div');
+        content.classList.add(TAB_CONTENT_STYLE.VERT.style());
+        root.appendChild(content);
+        let text = document.createElement('div');
+        content.appendChild(text);
+        text.innerHTML = data[0].content;
+        return {content:content, text:text};
+    }
+    
+    function createEvents(accessor){
+        let butts = accessor.container.getElementsByTagName('button');
+        for (let butt of butts){
+            butt.addEventListener('click',()=>{
+                for (let b of butts){
+                    b.classList.remove('active');
+                }
+                butt.classList.add('active');
+                for (let d of accessor.data){
+                    
+                    if (isTypeOf(d.id, TYPE.NUMBER)){
+                        if (d.id === Number(butt.id)){
+                            accessor.text.innerHTML = d.content;
+							_selected = d;
+                        }
+                    }
+                    if (isTypeOf(d.id, TYPE.STRING)){
+                        if (d.id.localCompare(butt.id) === 0){
+                            accessor.text.innerHTML = d.content;
+							_selected = d;
+                        }
+                    }
+                }
+            });
+        }
+    }
+    
+    function _tab(data){
+
+        let accessor = {
+            root: null,
+            data: null,
+            container: null,
+            content: null,
+            text: null,
+            
+            blue : _setBlueTabTheme,
+            red : _setRedTabTheme,
+            green : _setGreenTabTheme,
+            black : _setBlackTabTheme,
+            
+            horizontal : _setHorTab
+        }
+        
+        let root = document.getElementById(this.id);
+
+        if (isTypeOf(root, TYPE.UNDEF) || root == null){
+            printWarn("tab can't be appended to undefined");
+            return accessor;
+        }
+        root.innerHTML = '';
+        accessor.root = root;
+        
+        let fData = tabFilter(data);
+        if (fData === null){
+            printWarn("tab data invalid");
+            return accessor;
+        }
+        accessor.data = fData;
+        accessor.container = createContainer(root, fData);
+        accessor.container.classList.add(TAB_COLOR_THEME.GRAY.style())
+        let content = createContent(root, fData);
+        accessor.content = content.content;
+        accessor.text = content.text;
+        accessor.content.classList.add(TAB_COLOR_THEME.GRAY.style())
+        
+        createEvents(accessor);
+        
         return accessor;
     }
     /*
@@ -1275,7 +1853,8 @@
         return {
             id : _id,
             table : _table,
-            header : _header
+            header : _header,
+            tab : _tab
         };
     }    
     /*

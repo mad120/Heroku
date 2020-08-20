@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <script src="../oform.js"></script>
+        
+        <script defer src="index.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../index.css">
+        
+        
+    </head>
+    <body>
+        
+
+        <div id="header"></div>
+        
+        <div class="row">
+            <h3>Tab</h3>
+            <p>
+                Usage : <b class="code-b">oform</b><b class="code-y">.append(id)</b><b class="code-b">.tab(data)</b>
+            </p>
+            <p>
+                <b class="code-b">oform</b><b class="code-y">.append(id)</b><b class="code-b">.tab(data).horizontal().red()</b>
+            </p>
+            
+            <p> By default tab is vertical but has setter for horizontal position. Also there are different color themes available (gray by default). If there is too many tabs / content the overflow style appears</p>
+
+        </div>
+        <div class="row">
+            <h3>Tab color/position setters, scrollable content</h3>
+            <div id="tab"></div>
+        </div>
+        <div class="row">
+            <h3>Vertical scrollable tabs</h3>
+            <p><b class="code-b">oform</b><b class="code-y">.append('tabv').tab(data2).blue();</b></p>
+            <div id="tabv"></div>
+        </div>
+        <div class="row">
+            <h3>Horizontal scrollable tabs</h3>
+            <p><b class="code-b">oform</b><b class="code-y">.append('tabh').tab(data2).horizontal().black();</b></p>
+            <div id="tabh"></div>
+        </div>
+        
+    </body>
+</html> 

@@ -15,8 +15,13 @@ let header = {
     menu : [
         {
             label : 'Overview',
-            text : 'Short information about framework',
+            text : 'Short information about library',
             id : 'index.html'
+        },
+        {
+            label : 'API',
+            text : 'docs',
+            id : 'api/API.html'
         },
         {
             label : 'Tables Intro',
@@ -36,12 +41,17 @@ let header = {
         {
             label : 'Header Examples',
             text : 'Examples for header generator overview',
-            id : '../header/index.html'
+            id : 'header/index.html'
         },
         {
             label : 'Header Menu',
             text : 'Menu events',
-            id : '../header_menu/index.html'
+            id : 'header_menu/index.html'
+        },
+        {
+            label : 'Tabs',
+            text : 'Tab generator',
+            id : 'tab/index.html'
         }
     ]
 };

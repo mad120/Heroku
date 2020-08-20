@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <script src="../oform.js"></script>
+        
+        <script defer src="api.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../index.css">
+        
+    </head>
+    <body>
+        
+
+        <div id="header"></div>
+        
+        <div class="row">
+            <h2>API</h2>
+        </div>
+        <div class="row">
+            <h3>Getting Started</h3>
+            <p>
+                To use oform on web page just add script tag
+            </p>
+            <p class='code-y'>
+                <b><</b>script src=
+                    <b class='code-b'>'path to library /oform.js'</b>
+                    <b>></b><b><</b>/script<b>></b>
+            </p>
+            <p>
+                Create an empty element to place content that will be generated. Set id attribute that will be used while calling the library.
+                
+            </p>
+            <p class='code-y'>
+                <b><</b>
+                    div id=
+                    <b class='code-b'>'this id will be used by library'</b>
+                <b>></b>
+                <b><</b>
+                /div
+                <b>></b>
+            </p>
+            <p>
+                Now it's possible to use oform.js functions in custom scripts.
+            </p>      
+            
+        </div>
+        <div class="row">
+            <h3>Usage</h3>
+            <p>
+                <h3>oform.</h3>
+                Object to access library functionality
+                <div id="oform_f"></div>
+            </p>
+        </div>
+        <div class="row">
+            <p>
+                <h3>oform.append(id).</h3>
+                Function that returns references to library generators
+                <div id="append_f"></div>
+            </p>
+        </div>
+        <div class="row">
+            <p>
+                <h3>oform.append(id).table(data).</h3>
+                Table generator. Function that add events.
+                <div id="table_f1"></div>
+            </p>
+            <p>
+                Table generator. Function that make simple calculations.
+                <div id="table_f2"></div>
+            </p>
+            <p>
+                Table generator. Function that modify table style. Could be used after table generator call
+                <div id="table_f3"></div>
+            </p>
+            <p>
+                Table generator. Function that modify table color. Could be used after any setter and has no return value (better to be closing setter)
+                <div id="table_f4"></div>
+            </p>
+        </div>
+        <div class="row">
+            <p>
+                <h3>oform.append(id).header(data).</h3>
+                Header generator. 
+                <div id="header_f"></div>
+            </p>
+        </div>
+        <div class="row">
+            <p>
+                <h3>oform.append(id).tab(data).</h3>
+                Tab generator. 
+                <div id="tab_f"></div>
+            </p>
+        </div>
+    </body>
+</html> 

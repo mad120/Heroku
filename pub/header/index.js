@@ -15,8 +15,13 @@ let header = {
     menu : [
         {
             label : 'Overview',
-            text : 'Short information about framework',
+            text : 'Short information about library',
             id : '../index.html'
+        },
+        {
+            label : 'API',
+            text : 'docs',
+            id : '../api/API.html'
         },
         {
             label : 'Tables Intro',
@@ -42,6 +47,11 @@ let header = {
             label : 'Header Menu',
             text : 'Menu events',
             id : '../header_menu/index.html'
+        },
+        {
+            label : 'Tabs',
+            text : 'Tab generator',
+            id : '../tab/index.html'
         }
         
     ]
@@ -50,7 +60,7 @@ let header = {
 /*
     HEADER CREATION
 */
-oform.append('header').header(header).left();
+oform.append('header').header(header).right().black();
             
 /*
     HEADER MENU SWITCH

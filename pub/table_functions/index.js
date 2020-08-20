@@ -15,8 +15,13 @@ let header = {
     menu : [
         {
             label : 'Overview',
-            text : 'Short information about framework',
+            text : 'Short information about library',
             id : '../index.html'
+        },
+        {
+            label : 'API',
+            text : 'docs',
+            id : '../api/API.html'
         },
         {
             label : 'Tables Intro',
@@ -42,6 +47,11 @@ let header = {
             label : 'Header Menu',
             text : 'Menu events',
             id : '../header_menu/index.html'
+        },
+        {
+            label : 'Tabs',
+            text : 'Tab generator',
+            id : '../tab/index.html'
         }
     ]
 };
@@ -49,7 +59,7 @@ let header = {
 /*
     HEADER CREATION
 */
-oform.append('header').header(header).right();
+oform.append('header').header(header).right().black();
             
 /*
     HEADER MENU SWITCH
@@ -90,10 +100,30 @@ let tableSwitch = [
         description : 'Create line with total number values in table header.'
     },
     {
+        id : 116,
+        'function' : '.rounded()',
+        description : 'Set border radius to the table cells.'
+    },
+    {
+        id : 117,
+        'function' : '.center()',
+        description : 'Set center align to table content.'
+    },
+    {
+        id : 118,
+        'function' : '.right()',
+        description : 'Set right align to table content.'
+    },
+    {
+        id : 119,
+        'function' : '.left()',
+        description : 'Set left align to table content.'
+    },
+    {
         id : 115,
-        'function' : '.total().sortable().avg().filtered()',
+        'function' : '.rounded().right().total().sortable().avg().filtered()',
         description : 'All setters could be combined in any order.'
-    }
+    }    
 ];
 
 let tableExampleL = [
@@ -131,9 +161,7 @@ oform.append("table_switch").table(tableSwitch).black();
 oform.append("table").table(tableExampleL).white();
 
 document.getElementById('table_switch').addEventListener("click", ()=>{
-    console.log(oform.selected());
     if (typeof(oform.selected()) !== 'undefined' || oform.selected() !== null){
-        console.log(oform.selected());
         if (oform.selected().id === 111){
             oform.append("table").table(tableExampleL).sortable().white();
         }
@@ -147,7 +175,19 @@ document.getElementById('table_switch').addEventListener("click", ()=>{
             oform.append("table").table(tableExampleL).total().white();
         }
         if (oform.selected().id === 115){
-            oform.append("table").table(tableExampleL).total().sortable().avg().filtered().white();
+            oform.append("table").table(tableExampleL).rounded().right().total().sortable().avg().filtered().white();
+        }
+        if (oform.selected().id === 116){
+            oform.append("table").table(tableExampleL).rounded().white();
+        }
+        if (oform.selected().id === 117){
+            oform.append("table").table(tableExampleL).center().white();
+        }
+        if (oform.selected().id === 119){
+            oform.append("table").table(tableExampleL).left().white();
+        }
+        if (oform.selected().id === 118){
+            oform.append("table").table(tableExampleL).right().white();
         }
     }
     

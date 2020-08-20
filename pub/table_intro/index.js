@@ -15,8 +15,13 @@ let header = {
     menu : [
         {
             label : 'Overview',
-            text : 'Short information about framework',
+            text : 'Short information about library',
             id : '../index.html'
+        },
+        {
+            label : 'API',
+            text : 'docs',
+            id : '../api/API.html'
         },
         {
             label : 'Tables Intro',
@@ -42,6 +47,11 @@ let header = {
             label : 'Header Menu',
             text : 'Menu events',
             id : '../header_menu/index.html'
+        },
+        {
+            label : 'Tabs',
+            text : 'Tab generator',
+            id : '../tab/index.html'
         }
     ]
 };
@@ -49,7 +59,7 @@ let header = {
 /*
     HEADER CREATION
 */
-oform.append('header').header(header).black();
+oform.append('header').header(header).right().black();
             
 /*
     HEADER MENU SWITCH
@@ -158,9 +168,7 @@ oform.append("table_switch").table(tableSwitch).black();
 oform.append("table").table(tableExampleS).white();
 
 document.getElementById('table_switch').addEventListener("click", ()=>{
-    console.log(oform.selected());
     if (typeof(oform.selected()) !== 'undefined' || oform.selected() !== null){
-        console.log(oform.selected());
         if (oform.selected().id === 123){
             oform.append("table").table(tableExampleS).white();
         }
