@@ -96,17 +96,17 @@ oform.append('append_f').table([
     {
         function : '.table(data)',
         description: 'Table generator. Gives access to table setters. Input data format (array with objects): \
-                       <br><img src="table_input_ex.jpg" width="70%"></img>'
+                       <br><img src="../images/table_input_ex.jpg" width="70%"></img>'
     },
     {
         function : '.header(data)',
         description: 'Header generator. Gives access to header setters. Input data format (object): \
-                        <br><img src="header_input_ex.jpg" width="70%"></img>'
+                        <br><img src="../images/header_input_ex.jpg" width="70%"></img>'
     },
         {
         function : '.tab(data)',
         description: 'Tab generator. Gives access to tab setters. Input data format (array with objects): \
-                        <br><img src="tab_input_ex.jpg" width="70%"></img>'
+                        <br><img src="../images/tab_input_ex.jpg" width="70%"></img>'
     },
 ]).left().white();
  
