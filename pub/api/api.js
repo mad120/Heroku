@@ -16,7 +16,7 @@ let header = {
     menu : [
         {
             label : 'Overview',
-            text : 'Short information about framework',
+            text : 'Short information about library',
             id : '../index.html'
         },
         {
